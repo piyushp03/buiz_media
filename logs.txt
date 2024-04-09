@@ -1,0 +1,19 @@
+USP.......
+google maps
+posts
+contact the business / enquiry (dm, email, call, whatsapp)
+
+
+--------------------  TOOLS  ---------------------------
+
+react native 
+expo
+tailwindcss (styling)
+firebase(db)
+clerk (authentication/ user managment)
+
+
+--------------------  LOGS  ----------------------------
+------ Piyush 9 April ------
+
+Login page , authentication, clerk account signup
