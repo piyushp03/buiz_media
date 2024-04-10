@@ -4,16 +4,20 @@ posts
 contact the business / enquiry (dm, email, call, whatsapp)
 
 
---------------------  TOOLS  ---------------------------
+--------------------  TOOLS/ Libraries  ---------------------------
 
 react native 
 expo
 tailwindcss (styling)
 firebase(db)
 clerk (authentication/ user managment)
-
+react navigation (navbar bottom)
 
 --------------------  LOGS  ----------------------------
 ------ Piyush 9 April ------
 
 Login page , authentication, clerk account signup
+
+------ Piyush 10 April ------
+tab navigation created, firebase setup and api setup
+firebase collection fetching?
