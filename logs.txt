@@ -21,3 +21,7 @@ Login page , authentication, clerk account signup
 ------ Piyush 10 April ------
 tab navigation created, firebase setup and api setup
 firebase collection fetching?
+
+------ Arnab 11 April -------
+form page fields, categories included, expo picker used for form and image, 
+image modifications allowed, plugin configuration
