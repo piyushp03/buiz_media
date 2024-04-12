@@ -1,16 +1,20 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ToastAndroid } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { app } from '../../firebaseConfig';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import { getFirestore, getDocs, collection } from 'firebase/firestore';
-
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { useUser } from '@clerk/clerk-expo';
 
 export default function AddPostScreen() {
   
   const [image, setImage] = useState(null);
   const db = getFirestore(app);
+  const storage = getStorage();
+  const [loading,setLoading]=useState(false);
+  const {user}=useUser();
   const [categoryList, setCategoryList]=useState([]);
 
   useEffect(()=>{
@@ -48,9 +52,34 @@ export default function AddPostScreen() {
     }
   };
   
-  const onSubmitMethod=(value)=>{
-    value.image=image;
-    console.log(value);
+  const onSubmitMethod=async(value)=>{
+    setLoading(true);
+    //Convert URI to Blob File
+    const resp=await fetch(image);
+    const blob=await resp.blob();
+    const storageRef = ref(storage, 'communityPost/'+Date.now()+".jpg");
+
+    uploadBytes(storageRef, blob).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+    }).then((resp)=>{
+      getDownloadURL(storageRef).then(async(downloadUrl)=>{
+        console.log(downloadUrl);
+        value.image=downloadUrl;
+        value.userName=user.fullName;
+        value.userEmail=user.primaryEmailAddress.emailAddress;
+        value.UserImage=user.imageUrl;
+
+        const docRef = await addDoc(collection(db, "UserPost"),value)
+        if(docRef.id)
+        {
+          setLoading(false);
+          
+          Alert.alert("Success!!","Post added successfully")
+        }
+        
+      })
+    });
+    
   }
 
   return (
@@ -58,8 +87,8 @@ export default function AddPostScreen() {
       <Text className="text-[27px] font-bold">Add New Post</Text>
       <Text className="text-[16px] text-gray-500 mb-7">Create New Post and Start Selling</Text>
       <Formik
-        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:''}}
-        onSubmit={value=>onSubmitMethod=(value)}
+        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:'', username:'', userEmail:'', userImage:''}}
+        onSubmit={onSubmitMethod}
         validate={(values)=>{
           const errors={}
           if(!values.title)
@@ -120,9 +149,18 @@ export default function AddPostScreen() {
                 
               </Picker>
 
-                <TouchableOpacity onPress={handleSubmit} 
+                <TouchableOpacity onPress={handleSubmit}
+                style={{
+                  backgroundColor:loading?'#ccc':'#007BFF',
+
+                }}
+                disabled={loading}
                   className="p-5 bg-blue-500 rounded-full mt-3">
-                  <Text className="text-white text-center text-[17px]">Search</Text>
+                    {loading?
+                     <ActivityIndicator color='#fff' />
+                     :
+                     <Text className="text-white text-center text-[17px]">Search</Text>
+                  }
                 </TouchableOpacity>
 
 
