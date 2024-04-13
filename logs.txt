@@ -24,11 +24,15 @@ Login page , authentication, clerk account signup
 tab navigation created, firebase setup and api setup
 firebase collection fetching?
 
------- Arnab 11,12 April ------
-fromik, image picker
+------ Arnab 11 April -------
+form page fields, categories included, expo picker used for form and image, 
+image modifications allowed, plugin configuration
+
+------ Arnab 12 April -------
+user data collection, minor changes to search button activity
 
 ------ Piyush 13 April ------
 
 firebase db collection issue solved, collection now getting fetched
 
-* allow read, write: if true; * needs changing when published
+^^^^^^^* allow read, write: if true; * needs changing when published ^^^^^^^^

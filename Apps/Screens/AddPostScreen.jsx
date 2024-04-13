@@ -8,7 +8,12 @@ import { getFirestore, getDocs, collection } from "firebase/firestore";
 
 // TODO: Seprate post options for busniess and simple users
 
+
 export default function AddPostScreen() {
+ 
+  useEffect(()=>{
+    getCategoryList();
+  },[]) // when component is initialied [] lets the method load only once
   
   const db = getFirestore(app);
   const [categoryList, setCategoryList]=useState([]);
@@ -24,10 +29,6 @@ export default function AddPostScreen() {
     })
     
   }
-  
-  useEffect(()=>{
-    getCategoryList();
-  },[]) // when component is initialied [] lets the method load only once
   
   return (
     <View className="p-10">
