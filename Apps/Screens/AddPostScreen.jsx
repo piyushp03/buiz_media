@@ -3,28 +3,31 @@ import React, { useEffect, useState } from 'react'
 import { app } from '../../firebaseConfig';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
-import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 
+
+// TODO: Seprate post options for busniess and simple users
 
 export default function AddPostScreen() {
   
   const db = getFirestore(app);
   const [categoryList, setCategoryList]=useState([]);
 
-  useEffect(()=>{
-    getCategoryList();
-  },[]) // when component is initialied [] lets the method load only once
-
+  
   const getCategoryList=async()=>{
     setCategoryList([]);
-    const querySnapshot=await getDocs(collection(db, "P_Category")); // category collection
+    const querySnapshot=await getDocs(collection(db, "Category")); // category collection
     
     querySnapshot.forEach((doc)=>{
       console.log("Docs:", doc.data());
       setCategoryList(categoryList=>[...categoryList, doc.data()]);
     })
-
+    
   }
+  
+  useEffect(()=>{
+    getCategoryList();
+  },[]) // when component is initialied [] lets the method load only once
   
   return (
     <View className="p-10">
@@ -77,7 +80,7 @@ export default function AddPostScreen() {
 
                 <TouchableOpacity onPress={handleSubmit} 
                   className="p-5 bg-blue-500 rounded-full mt-20">
-                  <Text className="text-white text-center text-[16px]">Search</Text>
+                  <Text className="text-white text-center text-[16px]">Submit</Text>
                 </TouchableOpacity>
 
 

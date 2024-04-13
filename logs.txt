@@ -2,7 +2,9 @@ USP.......
 google maps
 posts
 contact the business / enquiry (dm, email, call, whatsapp)
-
+crud operations
+bank account linking for both business and user, payment gateway
+diff apps for user, admin , business
 
 --------------------  TOOLS/ Libraries  ---------------------------
 
@@ -21,3 +23,12 @@ Login page , authentication, clerk account signup
 ------ Piyush 10 April ------
 tab navigation created, firebase setup and api setup
 firebase collection fetching?
+
+------ Arnab 11,12 April ------
+fromik, image picker
+
+------ Piyush 13 April ------
+
+firebase db collection issue solved, collection now getting fetched
+
+* allow read, write: if true; * needs changing when published
