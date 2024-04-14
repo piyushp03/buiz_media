@@ -23,7 +23,7 @@ export default function AddPostScreen() {
 
   const getCategoryList=async()=>{
     setCategoryList([]);
-    const querySnapshot=await getDocs(collection(db, "P_Category")); // category collection
+    const querySnapshot=await getDocs(collection(db, "Category")); // category collection
     
     querySnapshot.forEach((doc)=>{
       console.log("Docs:", doc.data());
@@ -159,7 +159,7 @@ export default function AddPostScreen() {
                     {loading?
                      <ActivityIndicator color='#fff' />
                      :
-                     <Text className="text-white text-center text-[17px]">Search</Text>
+                     <Text className="text-white text-center text-[17px]">Submit</Text>
                   }
                 </TouchableOpacity>
 
