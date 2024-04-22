@@ -2,9 +2,7 @@ USP.......
 google maps
 posts
 contact the business / enquiry (dm, email, call, whatsapp)
-crud operations
-bank account linking for both business and user, payment gateway
-diff apps for user, admin , business
+
 
 --------------------  TOOLS/ Libraries  ---------------------------
 
@@ -30,9 +28,3 @@ image modifications allowed, plugin configuration
 
 ------ Arnab 12 April -------
 user data collection, minor changes to search button activity
-
------- Piyush 13 April ------
-
-firebase db collection issue solved, collection now getting fetched
-
-^^^^^^^* allow read, write: if true; * needs changing when published ^^^^^^^^
