@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { app } from '../../firebaseConfig';
 import { Formik } from 'formik';
@@ -22,6 +22,7 @@ export default function AddPostScreen() {
   const getCategoryList=async()=>{
     setCategoryList([]);
     const querySnapshot=await getDocs(collection(db, "Category")); // category collection
+    const querySnapshot=await getDocs(collection(db, "Category")); // category collection
     
     querySnapshot.forEach((doc)=>{
       console.log("Docs:", doc.data());
@@ -29,17 +30,35 @@ export default function AddPostScreen() {
     })
     
   }
-  
+
   return (
     <View className="p-10">
       <Text className="text-[27px] font-bold">Add New Post</Text>
       <Text className="text-[16px] text-gray-500 mb-7">Create New Post and Start Selling</Text>
       <Formik
-        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:''}}
-        onSubmit={value=>console.log(value)}
-        >
-          {({handleChange,handleBlur,handleSubmit,values})=>(
+        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:'', username:'', userEmail:'', userImage:''}}
+        onSubmit={onSubmitMethod}
+        validate={(values)=>{
+          const errors={}
+          if(!values.title)
+          {
+            console.log("Title not Present");
+            ToastAndroid.show('Title must be there', ToastAndroid.SHORT)
+            errors.name="Title must be there"
+          }
+          return errors
+        }}
+      >
+          {({handleChange,handleBlur,handleSubmit,values,setFieldValue,initialErrors})=>(
             <View>
+
+              <TouchableOpacity onPress={pickImage}/>
+              {image?
+              <image source={{uri:image}} style={{width:100,height:100,borderRadius:15}}/>
+              :
+              <Image source={require('./../../assets/images.jpeg')}
+              style={{width:100,height:100,borderRadius:15}}
+                />}
                 <TextInput
                   style={styles.input}
                   placeholder='Title'
