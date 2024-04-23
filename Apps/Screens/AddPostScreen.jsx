@@ -1,10 +1,13 @@
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator } from 'react-native'
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, ToastAndroid, ActivityIndicator, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { app } from '../../firebaseConfig';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
-import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { getFirestore, getDocs, addDoc, collection } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 import * as ImagePicker from 'expo-image-picker';
+import { useUser } from '@clerk/clerk-expo';
 
 
 // TODO: Seprate post options for busniess and simple users
@@ -17,8 +20,10 @@ export default function AddPostScreen() {
   },[]) // when component is initialied [] lets the method load only once
 
   const db = getFirestore(app);
+  const storage=getStorage();
   const [categoryList, setCategoryList]=useState([]);
-
+  const {user}=useUser();
+  const [loading, setLoading] = useState(false);
 
   const getCategoryList=async()=>{
     setCategoryList([]);
@@ -47,9 +52,34 @@ export default function AddPostScreen() {
     }
   };
 
-  const onSubmitMethod=(value)=>{
-    value.image=image;
-    console.log(value)
+  const onSubmitMethod=async(value)=>{
+    //console.log(value)
+    // convert image to blob for storing
+    setLoading(true);
+
+    const resp= await fetch(image);
+    const blob=await resp.blob();
+    const storageRef = ref(storage, 'businessPost/'+Date.now()+".jpg");
+
+    uploadBytes(storageRef, blob).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+    }).then((resp)=>{
+      getDownloadURL(storageRef).then(async(downloadUrl)=>{
+        console.log(downloadUrl);
+        value.image=downloadUrl;
+        value.userName=user.fullName;
+        value.userEmail=user.primaryEmailAddress.emailAddress;
+        value.userImage=user.imageUrl;
+
+        const docRef = await addDoc(collection(db, "businessPost"), value)
+        if(docRef.id){
+          setLoading(false);
+          Alert.alert("Post Added", "Great Success!");
+          //console.log("Post added.");
+        }
+      })
+    });
+    
   }
 
 
@@ -74,7 +104,6 @@ export default function AddPostScreen() {
       >
           {({handleChange,handleBlur,handleSubmit,values,setFieldValue,initialErrors})=>(
             <View>
-
 
 <>{/*???????*/}</>
 
@@ -128,8 +157,18 @@ export default function AddPostScreen() {
               </Picker>
 
                 <TouchableOpacity onPress={handleSubmit} 
-                  className="p-5 bg-blue-500 rounded-full mt-20">
-                  <Text className="text-white text-center text-[16px]">Submit</Text>
+
+                style={{
+                  backgroundColor: loading? '#ccc': '#007bff'
+                }}
+                disabled={loading}
+                  className="p-4 bg-blue-500 rounded-full mt-10">
+                  {loading?
+                    <ActivityIndicator color="#fff"/> 
+                    :
+                    <Text className="text-white text-center text-[16px]">Submit
+                    </Text>
+                    }                  
                 </TouchableOpacity>
 
 
