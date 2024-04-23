@@ -4,13 +4,14 @@ import { app } from '../../firebaseConfig';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { getFirestore, getDocs, collection } from "firebase/firestore";
+import * as ImagePicker from 'expo-image-picker';
 
 
 // TODO: Seprate post options for busniess and simple users
 
 
 export default function AddPostScreen() {
-
+  const [image, setImage]=useState(null);
   useEffect(()=>{
     getCategoryList();
   },[]) // when component is initialied [] lets the method load only once
@@ -30,6 +31,28 @@ export default function AddPostScreen() {
 
   }
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if(!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  const onSubmitMethod=(value)=>{
+    value.image=image;
+    console.log(value)
+  }
+
+
   return (
     <View className="p-10">
       <Text className="text-[27px] font-bold">Add New Post</Text>
@@ -37,7 +60,7 @@ export default function AddPostScreen() {
       <Formik
         initialValues={{title:'', desc:'', category:'', address:'', price:'', image:'', username:'', userEmail:'', userImage:''}}
      //
-        onSubmit={value=>console.log(value)}
+        onSubmit={value=>onSubmitMethod(value)}
         validate={(values)=>{
           const errors={}
           if(!values.title)
@@ -54,13 +77,17 @@ export default function AddPostScreen() {
 
 
 <>{/*???????*/}</>
-           {/*    <TouchableOpacity onPress={pickImage}/>
-              {image?
-              <image source={{uri:image}} style={{width:100,height:100,borderRadius:15}}/>
-              :
-              <Image source={require('./../../assets/images.jpeg')}
-              style={{width:100,height:100,borderRadius:15}}
-                />} */}
+
+                <TouchableOpacity onPress={pickImage}>
+
+                {image?
+                  <Image source={{uri:image}} style={{width:100, height:100}}></Image>
+                  :
+                   <Image source={require('./../../assets/images/placeholder.jpeg')}
+                  style={{width:100, height:100, borderRadius:15}}
+                  /> }
+                  
+                </TouchableOpacity>
                 <TextInput
                   style={styles.input}
                   placeholder='Title'
