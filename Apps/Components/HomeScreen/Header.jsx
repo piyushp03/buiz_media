@@ -22,7 +22,7 @@ export default function Header() {
         </View>
       </View>
       {/*search bar*/}
-      <View className='p-3 px-5 flex flex-row items-center bg-white mt-5 rounded-full border-[1px] border-blue-300 '>
+      <View className='p-[9px] px-5 flex flex-row items-center bg-blue-50 mt-5 rounded-full border-[1px] border-blue-300 '>
       <FontAwesome name="search" size={24} color="gray" className='ml-3' />
 
         <TextInput placeholder='Search' className='ml-2 text-[18px]'
