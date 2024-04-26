@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../Components/HomeScreen/Header'
 import Slider from '../Components/HomeScreen/Slider'
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, orderBy } from "firebase/firestore";
 import { app } from '../../firebaseConfig';
 import Categories from '../Components/HomeScreen/Categories';
+import LatestItemList from '../Components/HomeScreen/LatestItemList';
 
 
 export default function HomeScreen() {
@@ -12,9 +13,11 @@ export default function HomeScreen() {
   const db = getFirestore(app);
   const [sliderList, setSliderList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
+  const [latestItemList, setLatestItemList]=useState([]);
   useEffect(() => {
     getSliders();
     getCategoryList();
+    getLatestItemList();
   }, [])
 
 
@@ -40,12 +43,22 @@ export default function HomeScreen() {
 
   }
 
+  const getLatestItemList=async()=>{
+    setLatestItemList([]);
+    const querySnapshot=await getDocs(collection(db, "businessPost"),orderBy('createdAt', 'desc')); // category collection
+
+    querySnapshot.forEach((doc)=>{
+      console.log("Docs:", doc.data());
+      setLatestItemList(latestItemList=>[...latestItemList, doc.data()]);
+     })
+}
 
   return (
-    <View className='py-8 px-6 bg-white flex-1'>
+    <ScrollView className='py-8 px-6 bg-white flex-1'>
       <Header/>
       <Slider sliderList={sliderList}/>
       <Categories categoryList={categoryList}/>
-    </View>
+      <LatestItemList latestItemList={latestItemList} />
+    </ScrollView>
   )
 }

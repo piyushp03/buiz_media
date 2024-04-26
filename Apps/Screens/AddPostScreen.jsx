@@ -88,7 +88,7 @@ export default function AddPostScreen() {
       <Text className="text-[27px] font-bold">Add New Post</Text>
       <Text className="text-[16px] text-gray-500 mb-7">Create New Post and Start Selling</Text>
       <Formik
-        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:'', username:'', userEmail:'', userImage:''}}
+        initialValues={{title:'', desc:'', category:'', address:'', price:'', image:'', username:'', userEmail:'', userImage:'', createdAt:Date.now()}}
      //
         onSubmit={value=>onSubmitMethod(value)}
         validate={(values)=>{
