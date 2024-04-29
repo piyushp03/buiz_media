@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Screens/HomeScreen';
 import ItemList from '../Screens/ItemList';
+import ProductDetail from '../Screens/ProductDetail';
 
 
 const Stack = createStackNavigator();
@@ -21,6 +22,21 @@ export default function HomeScreenStackNav() {
             })}
 
             /* shows the category name when the tab is opened */
+        />
+
+        <Stack.Screen name="product-detail" component={ProductDetail}
+        /* ^ points to the page to be redirected */
+            options={{
+              headerStyle:{
+                backgroundColor: '#3b82f6',
+              },
+              headerTintColor: '#fff',
+              headerTitle:'Product Details',
+            }}
+
+            /* redirects to the product details page 
+            will add google maps location here?
+            */
         />
 
     </Stack.Navigator>
