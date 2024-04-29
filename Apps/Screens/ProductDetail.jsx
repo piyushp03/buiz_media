@@ -1,16 +1,43 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Linking } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity, Linking, Share } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useRoute } from '@react-navigation/native'
+import { FontAwesome } from '@expo/vector-icons';
 
-export default function ProductDetail() {
+export default function ProductDetail({navigation}) {
   const {params}=useRoute();
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
     console.log(params);
     params&&setProduct(params.product);
-  },[params])
+    shareButton();
+  },[params,navigation])
   
+  const shareButton=()=>{
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={()=>shareProduct()}>
+        <FontAwesome name="share" size={20} color="white" 
+          style={{marginRight:10}}
+          
+        />
+      </TouchableOpacity>
+      ),
+    })
+  }
+
+
+  const shareProduct=async()=>{
+    const content={
+      message:product?.title+'\n'+product?.desc,
+    }
+    Share.share(content).then(resp=>{
+      console.log(resp);
+    },(error)=>{
+      console.log(error);
+    })
+  }
+
   const SendEmailMessage=()=>{
     const subject='Regarding '+product.title;
     const body="Hi "+product.userName+",\n";
