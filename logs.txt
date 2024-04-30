@@ -15,12 +15,14 @@ react navigation (navbar bottom)
 
 --------------------  Pendings  ----------------------------
 
-business page
-payment gateway
+**business page
+**payment gateway
 business offers
 upvoting downvoting and suggestions accordingly
-g maps
+**g maps
 near you
-dms
+**dms
 phone contact 
 restyling 
+better login and welcome 
+**my orders 
