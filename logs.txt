@@ -13,18 +13,14 @@ firebase(db)
 clerk (authentication/ user managment)
 react navigation (navbar bottom)
 
---------------------  LOGS  ----------------------------
------- Piyush 9 April ------
+--------------------  Pendings  ----------------------------
 
-Login page , authentication, clerk account signup
-
------- Piyush 10 April ------
-tab navigation created, firebase setup and api setup
-firebase collection fetching?
-
------- Arnab 11 April -------
-form page fields, categories included, expo picker used for form and image, 
-image modifications allowed, plugin configuration
-
------- Arnab 12 April -------
-user data collection, minor changes to search button activity
+business page
+payment gateway
+business offers
+upvoting downvoting and suggestions accordingly
+g maps
+near you
+dms
+phone contact 
+restyling 
