@@ -11,6 +11,7 @@ import ProfileScreen from '../Screens/ProfileScreen';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreenStackNav from './HomeScreenStackNav';
+import ExploreScreenStackNav from './ExploreScreenStackNav';
 
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +24,7 @@ export default function TabNavigation() {
       <Tab.Screen name='home-nav' component={HomeScreenStackNav}
         options={{
           tabBarLabel: ({color})=>(
-            <Text style={{color:color, fontSize:12, marginBottom:3}}>Home</Text>
+            <Text style={{color:color, fontSize:12, marginBottom:3}}>Home </Text>
           ),
           tabBarIcon: ({color, size})=>(
             <AntDesign name="home" size={size} color={color} /> //? icon import
@@ -31,10 +32,10 @@ export default function TabNavigation() {
         }}
       />
 
-      <Tab.Screen name='explore' component={ExploreScreen}
+      <Tab.Screen name='explore' component={ExploreScreenStackNav}
          options={{
           tabBarLabel: ({color})=>(
-            <Text style={{color:color, fontSize:12, marginBottom:3}}>Explore</Text>
+            <Text style={{color:color, fontSize:12, marginBottom:3}}>Explore  </Text>
           ),
           tabBarIcon: ({color, size})=>(
             <AntDesign name="search1" size={size} color={color} />
@@ -45,7 +46,7 @@ export default function TabNavigation() {
       <Tab.Screen name='addpost' component={AddPostScreen}
        options={{
         tabBarLabel: ({color})=>(
-          <Text style={{color:color, fontSize:12, marginBottom:3}}>Add Post</Text>
+          <Text style={{color:color, fontSize:12, marginBottom:3}}>Add Post  </Text>
         ),
         tabBarIcon: ({color, size})=>(
           <AntDesign name="camera" size={size} color={color} />
@@ -56,7 +57,7 @@ export default function TabNavigation() {
       <Tab.Screen name='profile' component={ProfileScreen}
        options={{
         tabBarLabel: ({color})=>(
-          <Text style={{color:color, fontSize:12, marginBottom:3}}>Profile</Text>
+          <Text style={{color:color, fontSize:12, marginBottom:3}}>Profile  </Text>
         ),
         tabBarIcon: ({color, size})=>(
           <Ionicons name="person-circle" size={size} color={color} />
