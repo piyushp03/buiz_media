@@ -1,6 +1,6 @@
 import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useUser } from '@clerk/clerk-expo'
+import { useAuth, useUser } from '@clerk/clerk-expo'
 import myPosts from './../../assets/images/myPosts.png'
 import search from './../../assets/images/search.png'
 import logout from './../../assets/images/logout.png'
@@ -10,6 +10,7 @@ export default function ProfileScreen() {
 
   const {user}=useUser();
   const navigation=useNavigation();
+  const {isLoaded, signOut} = useAuth();
   const menuList=[
     {
       id:1,
@@ -32,6 +33,9 @@ export default function ProfileScreen() {
 
 
   const onMenuPress=(item)=>{
+    if(item.name=='Logout'){
+      signOut();
+    }
     item?.path?navigation.navigate(item.path):null;
   }
 
@@ -50,7 +54,7 @@ export default function ProfileScreen() {
 
         <FlatList 
           data={menuList}
-          numColumns={3}
+          numColumns={2}
           style={{marginTop:20}}
           renderItem={({item,index})=>(
             <TouchableOpacity 
