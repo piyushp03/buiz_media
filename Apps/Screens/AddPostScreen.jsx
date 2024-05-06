@@ -112,7 +112,7 @@ export default function AddPostScreen() {
                 {image?
                   <Image source={{uri:image}} style={{width:100, height:100}}></Image>
                   :
-                   <Image source={require('./../../assets/images/placeholder.jpeg')}
+                   <Image source={require('./../../assets/images/placeholder.png')}
                   style={{width:100, height:100, borderRadius:15}}
                   /> }
                   

@@ -27,9 +27,9 @@ export default function LoginScreen() {
 
   return (
     <View>
-      {/* <Image source={require('../assets/cat.jpeg')} // ! better image and change location
+      <Image source={require('./../../assets/images/logins.jpeg')} // ! better image and change location
       className="w-full h-[400px] object-cover"
-      /> */}
+      />
 
       <View className="p-8 bg-white mt-[-20px] rounded-t-3xl shadow-md">
           <Text className="text-[35px] font-bold">Marketplace</Text>

@@ -13,13 +13,13 @@ export default function Categories({categoryList}) {
       data={categoryList}
       numColumns={4}
       renderItem={({item,index})=>(
-        <TouchableOpacity className="flex-1 item-center justify-center p-2 border-[1px] border-blue-200 m-1 h-[80px] rounded-lg bg-blue-50"
+        <TouchableOpacity className="flex-1 items-center justify-center p-2 border-[1px] border-blue-200 m-1 h-[80px] rounded-lg"
         onPress={()=>navigation.navigate('item-list', {category:item.name})}
         >
           <Image source={{uri:item.icon}}
-          className="w-[35px] h-[35px]"
+          className="w-[50px] h-[50px]"
           />
-          <Text className='text-[12px] mt-1'>{item.name}</Text> 
+          <Text className='text-[10px] mt-1'>{item.name}  </Text> 
         </TouchableOpacity>
       )}
       />
