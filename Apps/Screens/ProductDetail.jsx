@@ -92,7 +92,10 @@ export default function ProductDetail({navigation}) {
       
       </View>
 
-     <Button title='Pay' onPress={()=>navigation.navigate('payment-screen')}/>
+     <Button title='Pay' onPress={()=>navigation.navigate('payment-screen', 
+     {price: product?.price,
+      productName: product?.title
+     })}/>
       
       {/* posting user */}
         <View className='p-3 border-[1px] bg-blue-100 border-gray-400'>
