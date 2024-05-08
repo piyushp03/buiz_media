@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Screens/HomeScreen';
 import ItemList from '../Screens/ItemList';
 import ProductDetail from '../Screens/ProductDetail';
+import StripeApp from '../Components/Stripe/StripeApp';
 
 
 const Stack = createStackNavigator();
@@ -38,6 +39,10 @@ export default function HomeScreenStackNav() {
             will add google maps location here?
             */
         />
+
+          <Stack.Screen name="payment-screen" component={StripeApp} 
+                      options={{headerShown: false}}
+                  />
 
     </Stack.Navigator>
   )

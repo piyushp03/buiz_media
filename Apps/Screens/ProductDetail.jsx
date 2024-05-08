@@ -1,10 +1,11 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Linking, Share, Alert } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity, Linking, Share, Alert, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { Link, useNavigation, useRoute } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons';
 import { useUser } from '@clerk/clerk-expo';
 import { doc, deleteDoc, query, collection, getFirestore, where, getDocs } from "firebase/firestore";
 import { app } from '../../firebaseConfig';
+import StripeApp from '../Components/Stripe/StripeApp';
 
 export default function ProductDetail({navigation}) {
   const {params}=useRoute();
@@ -84,12 +85,15 @@ export default function ProductDetail({navigation}) {
         <View className='items-baseline'>
           <Text className="bg-blue-200 text-blue-500 text-[20px] font-bold bg-blue-200 p-[2px] rounded-full px-1 text-[15px] w-[100px] text-center mt-2">{product.category}</Text>
         </View>
+        <Text className="mt-3 font-bold text-blue-500 text-[18px]">₹{product?.price}</Text>
         <Text className="mt-3 font-bold text-[20px]">Product Description</Text>
         <Text className='text-[17px] text-gray-500'>{product?.desc}</Text>
       
       
       </View>
 
+     <Button title='Pay' onPress={()=>navigation.navigate('payment-screen')}/>
+      
       {/* posting user */}
         <View className='p-3 border-[1px] bg-blue-100 border-gray-400'>
           <Image source={{uri:product.userImage}} 
@@ -121,5 +125,6 @@ export default function ProductDetail({navigation}) {
       </TouchableOpacity>
     }
       </ScrollView>
+
   )
 }

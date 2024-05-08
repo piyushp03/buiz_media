@@ -4,6 +4,9 @@ import LoginScreen from './Apps/Screens/LoginScreen';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './Apps/Navigations/TabNavigation';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack=createStackNavigator();
 
 export default function App() {
   return (
@@ -23,5 +26,6 @@ export default function App() {
     
       </View>
     </ClerkProvider>
+
   );
 }
