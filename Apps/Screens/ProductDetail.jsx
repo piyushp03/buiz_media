@@ -5,7 +5,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useUser } from '@clerk/clerk-expo';
 import { doc, deleteDoc, query, collection, getFirestore, where, getDocs } from "firebase/firestore";
 import { app } from '../../firebaseConfig';
-import StripeApp from '../Components/Stripe/StripeApp';
+import { StripeProvider } from '@stripe/stripe-react-native';
+import PaymentScreen from './PaymentScreen';
+
 
 export default function ProductDetail({navigation}) {
   const {params}=useRoute();
@@ -106,6 +108,12 @@ export default function ProductDetail({navigation}) {
           <Text className='text-[15px] text-gray-500 mt-1'>{product.userEmail} </Text>
         </View>
 
+        <StripeProvider
+      publishableKey='pk_test_51PCNEYSDMiaUW4NZPyJumkmS4wssDhhdOb0GeeZVNowaGLoKIDjmySqgzMMfIO9fw2WvHgVeGJ0ZZPCLyGKujkQP00N6vferyi'>
+      {/* <PaymentScreen 
+        pay= {product?.price}
+      /> */}
+  </StripeProvider>
 
       {/* send message */}
 

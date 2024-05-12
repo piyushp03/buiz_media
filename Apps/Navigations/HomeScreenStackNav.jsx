@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Screens/HomeScreen';
 import ItemList from '../Screens/ItemList';
 import ProductDetail from '../Screens/ProductDetail';
-import StripeApp from '../Components/Stripe/StripeApp';
+import PaymentScreen from './../Screens/PaymentScreen';
 
 
 const Stack = createStackNavigator();
@@ -40,7 +40,7 @@ export default function HomeScreenStackNav() {
             */
         />
 
-          <Stack.Screen name="payment-screen" component={StripeApp} 
+          <Stack.Screen name="payment-screen" component={PaymentScreen} 
                       options={{headerShown: false}}
                   />
 
