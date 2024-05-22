@@ -33,7 +33,7 @@ export default function LoginScreen() {
 
       <View className="p-8 bg-white mt-[-20px] rounded-t-3xl shadow-md">
           <Text className="text-[35px] font-bold">Marketplace</Text>
-          <Text className="text-[18px] text-slate-500 mt-6">Place where you can see your local business</Text>
+          <Text className="text-[18px] text-slate-500 mt-6">Place where you can grow your local business</Text>
 
           <>{/*? entry point to the app when clicked sigin is logged to the console*/}</>
           <TouchableOpacity onPress={onPress} className="p-4 bg-blue-500 rounded-full mt-20">

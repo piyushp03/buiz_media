@@ -5,7 +5,8 @@ import { CardField, useConfirmPayment, confirmPayment } from "@stripe/stripe-rea
 //ADD localhost address of your server
 const API_URL = "http://192.168.0.103:3000";
 
-const PaymentScreen = props => {
+const PaymentScreen = ({route}) => {
+  const { productName, productPrice} = route.params;
   const [email, setEmail] = useState();
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
@@ -46,7 +47,7 @@ const PaymentScreen = props => {
           console.log(`Payment Confirmation Error ${error.message}`);
           
         } else if (paymentIntent) {
-          alert("Payment Successful");
+          alert(`Payment Successful!! \nProduct Name:  ${productName}\nAmount Payed: ₹${productPrice}`);
           console.log("Payment successful ", paymentIntent);
         }
       }
@@ -58,6 +59,8 @@ const PaymentScreen = props => {
 
   return (
     <View style={styles.container}>
+      <Text>Paying for: {productName}</Text>
+      <Text>Amount: ₹{productPrice}</Text>
       <TextInput
         autoCapitalize="none"
         placeholder="E-mail"

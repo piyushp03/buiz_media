@@ -95,7 +95,7 @@ export default function ProductDetail({navigation}) {
       </View>
 
      <Button title='Pay' onPress={()=>navigation.navigate('payment-screen', 
-     {price: product?.price,
+     {productPrice: product?.price,
       productName: product?.title
      })}/>
       
