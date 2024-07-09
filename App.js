@@ -10,7 +10,7 @@ const Stack=createStackNavigator();
 
 export default function App() {
   return (
-    <ClerkProvider publishableKey='pk_test_d2VhbHRoeS10b3VjYW4tOTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
+   <ClerkProvider publishableKey='pk_test_d2VhbHRoeS10b3VjYW4tOTMuY2xlcmsuYWNjb3VudHMuZGV2JA'>
       <View className="flex-1 bg-white">
         <StatusBar style="auto" />
 
@@ -25,7 +25,7 @@ export default function App() {
         </SignedOut>
     
       </View>
-    </ClerkProvider>
+   </ClerkProvider>
 
   );
 }
